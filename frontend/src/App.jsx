@@ -1,13 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
-
-import SortingPage from "./pages/SortingPage";
+import React from 'react';
+import Navbar from './components/Navbar';
+import SortingPage from './pages/SortingPage';
 
 function App() {
-  return <SortingPage />;
+  return (
+    <div className="app-container">
+      <Navbar />
+      
+      <main style={{ 
+        paddingTop: '100px', 
+        paddingBottom: '2rem',
+        paddingLeft: '2rem',
+        paddingRight: '2rem',
+        display: 'flex', 
+        justifyContent: 'center',
+        minHeight: '100vh'
+      }}>
+        {/* The Orchestrator takes over here */}
+        <SortingPage />
+      </main>
+    </div>
+  );
 }
 
 export default App;
