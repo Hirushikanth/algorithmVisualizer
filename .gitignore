@@ -1,0 +1,62 @@
+# Backend - Maven
+algovisual/target/
+algovisual/.mvn/wrapper/maven-wrapper.jar
+algovisual/.mvn/wrapper/maven-wrapper.properties
+algovisual/mvnw
+algovisual/mvnw.cmd
+
+# Frontend - Node.js and Vite
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+frontend/.env
+frontend/.env.local
+frontend/.env.*.local
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.iml
+*.iws
+*.ipr
+*.class
+
+# Build and dist
+*.jar
+*.war
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+
+# IDE plugins caches
+.classpath
+.project
+.settings/
+.vscode-test/
+
+# Misc
+*.orig
+*.rej
