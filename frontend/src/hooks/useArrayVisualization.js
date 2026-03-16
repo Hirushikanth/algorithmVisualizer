@@ -28,6 +28,13 @@ const useArrayVisualization = (array, highlight, pointerInfo, algorithm) => {
           indices.push(k);
         }
       }
+    } else if (algorithm === 'insertion') {
+      // Insertion sort sorts from the left up to index i.
+      const match = pointerInfo.match(/Pass (\d+)/);
+      if (match) {
+        const iVal = parseInt(match[1], 10);
+        for (let k = 0; k <= iVal; k++) indices.push(k);
+      }
     }
     return indices;
   }, [array, pointerInfo, algorithm]);
@@ -43,6 +50,9 @@ const useArrayVisualization = (array, highlight, pointerInfo, algorithm) => {
     } else if (algorithm === 'bubble' && highlight.length >= 2) {
       if (index === highlight[0]) labels.push('j');
       if (index === highlight[1]) labels.push('j+1');
+    } else if (algorithm === 'insertion' && highlight.length >= 2) {
+      if (index === highlight[0]) labels.push('key');
+      if (index === highlight[1]) labels.push('j');
     }
     return labels.join(', '); // If multiple pointers land on one bar (e.g., 'i, min')
   };

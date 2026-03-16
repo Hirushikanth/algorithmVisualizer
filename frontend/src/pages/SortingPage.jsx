@@ -8,11 +8,10 @@ import { Terminal } from 'lucide-react';
 
 const ARRAY_SIZE = 15;
 
-const SortingPage = () => {
+const SortingPage = ({ activeAlgorithm, setActiveAlgorithm }) => {
   const [baseArray, setBaseArray] = useState([]);
   const [sortSteps, setSortSteps] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
-  const [activeAlgorithm, setActiveAlgorithm] = useState('bubble');  // active alogitham bubble 
 
   const {
     currentStep, currentStepIndex, isPlaying, isFinished, progress, speedMs, setSpeedMs, play, pause, reset
@@ -22,13 +21,19 @@ const SortingPage = () => {
   const logEndRef = useRef(null);
 
   const generateNewArray = useCallback(() => {
-    const newArr = Array.from({ length: ARRAY_SIZE }, () => Math.floor(Math.random() * 90) + 10); // Random values between 10 and 99 for better visualization [6,18,97,4,17,27,3]
+    const newArr = Array.from({ length: ARRAY_SIZE }, () => Math.floor(Math.random() * 90) + 10);
     setBaseArray(newArr);
     setSortSteps([]); 
     reset(); 
   }, [reset]);
 
   useEffect(() => { generateNewArray(); }, [generateNewArray]) 
+
+  // Reset steps and animation when activeAlgorithm changes
+  useEffect(() => {
+    setSortSteps([]);
+    reset();
+  }, [activeAlgorithm, reset]);
 
   // Auto-scroll to top when a new array is generated
   useEffect(() => {
@@ -42,18 +47,13 @@ const SortingPage = () => {
     }
   }, [currentStepIndex]);
 
-  const handleAlgorithmChange = (algo) => {
-    setActiveAlgorithm(algo); //bubble 
-    setSortSteps([]); 
-    reset(); 
-  };
-
   const handleSort = async () => {
     setIsFetching(true);
     try {
       let steps = [];
       if (activeAlgorithm === 'bubble') steps = await sortAPI.getBubbleSortSteps(baseArray);
       else if (activeAlgorithm === 'selection') steps = await sortAPI.getSelectionSortSteps(baseArray);
+      else if (activeAlgorithm === 'insertion') steps = await sortAPI.getInsertionSortSteps(baseArray);
       
       setSortSteps(steps);
       setTimeout(() => play(), 100); 
@@ -91,28 +91,8 @@ const SortingPage = () => {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%' }}>
       
-      {/* HEADER & SELECTOR */}
+      {/* HEADER */}
       <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <div style={{ 
-          display: 'flex', background: 'rgba(255,255,255,0.05)', padding: '5px', 
-          borderRadius: '30px', marginBottom: '1.5rem', border: '1px solid rgba(255,255,255,0.1)'
-        }}>
-          {['bubble', 'selection'].map((algo) => ( //algo = bubble 
-            <button
-              key={algo} onClick={() => handleAlgorithmChange(algo)} //bubble
-              style={{
-                padding: '8px 24px', borderRadius: '25px', border: 'none',
-                background: activeAlgorithm === algo ? 'rgba(212, 168, 75, 0.15)' : 'transparent',
-                color: activeAlgorithm === algo ? 'var(--accent-gold)' : 'var(--text-muted)',
-                fontWeight: activeAlgorithm === algo ? 600 : 400, cursor: 'pointer',
-                transition: 'all 0.3s ease', textTransform: 'capitalize'
-              }}
-            >
-              {algo} Sort
-            </button>
-          ))}
-        </div>
-
         <h1 style={{ fontSize: '2.5rem', marginBottom: '0.5rem', color: 'white', textTransform: 'capitalize' }}>
           {activeAlgorithm} Sort
         </h1>
