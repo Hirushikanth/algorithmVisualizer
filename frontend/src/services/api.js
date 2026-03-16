@@ -33,5 +33,15 @@ export const sortAPI = {
             console.error("API Error: Selection Sort", error);
             return [];
         }
+    },
+
+    getInsertionSortSteps: async (array) => {
+        try {
+            const response = await apiClient.post('/sort/insertion', { array });
+            return response.data;
+        } catch (error) {
+            console.error("API Error: Insertion Sort", error);
+            return [];
+        }
     }
 };

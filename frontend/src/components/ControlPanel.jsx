@@ -1,5 +1,6 @@
 import React from 'react';
 import { Play, Pause, RotateCcw, Shuffle, Zap } from 'lucide-react';
+import useSpeedControl from '../hooks/useSpeedControl';
 
 const ControlPanel = ({ 
   isPlaying, 
@@ -13,13 +14,7 @@ const ControlPanel = ({
   setSpeedMs, 
   hasSteps 
 }) => {
-  
-  // Inverse speed for the slider (User thinks: higher = faster. Code needs: lower ms = faster)
-  const handleSpeedChange = (e) => {
-    // Range: 10ms (fast) to 500ms (slow)
-    const val = 510 - e.target.value; 
-    setSpeedMs(val);
-  };
+  const { handleSpeedChange } = useSpeedControl(speedMs, setSpeedMs);
 
   return (
     <div className="glass-panel" style={{
@@ -52,7 +47,7 @@ const ControlPanel = ({
         </button>
       </div>
 
-      {/* Center: Playback Controls (The Dopamine Zone) */}
+      {/* Center: Playback Controls */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
         <button 
           onClick={onReset}

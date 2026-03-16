@@ -12,7 +12,7 @@ const SortingPage = () => {
   const [baseArray, setBaseArray] = useState([]);
   const [sortSteps, setSortSteps] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
-  const [activeAlgorithm, setActiveAlgorithm] = useState('selection'); 
+  const [activeAlgorithm, setActiveAlgorithm] = useState('bubble');  // active alogitham bubble 
 
   const {
     currentStep, currentStepIndex, isPlaying, isFinished, progress, speedMs, setSpeedMs, play, pause, reset
@@ -22,13 +22,18 @@ const SortingPage = () => {
   const logEndRef = useRef(null);
 
   const generateNewArray = useCallback(() => {
-    const newArr = Array.from({ length: ARRAY_SIZE }, () => Math.floor(Math.random() * 90) + 10);
+    const newArr = Array.from({ length: ARRAY_SIZE }, () => Math.floor(Math.random() * 90) + 10); // Random values between 10 and 99 for better visualization [6,18,97,4,17,27,3]
     setBaseArray(newArr);
     setSortSteps([]); 
     reset(); 
   }, [reset]);
 
-  useEffect(() => { generateNewArray(); }, [generateNewArray]);
+  useEffect(() => { generateNewArray(); }, [generateNewArray]) 
+
+  // Auto-scroll to top when a new array is generated
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [baseArray]);
 
   // Auto-scroll the terminal down when a new step plays
   useEffect(() => {
@@ -38,7 +43,7 @@ const SortingPage = () => {
   }, [currentStepIndex]);
 
   const handleAlgorithmChange = (algo) => {
-    setActiveAlgorithm(algo);
+    setActiveAlgorithm(algo); //bubble 
     setSortSteps([]); 
     reset(); 
   };
@@ -92,9 +97,9 @@ const SortingPage = () => {
           display: 'flex', background: 'rgba(255,255,255,0.05)', padding: '5px', 
           borderRadius: '30px', marginBottom: '1.5rem', border: '1px solid rgba(255,255,255,0.1)'
         }}>
-          {['bubble', 'selection'].map((algo) => (
+          {['bubble', 'selection'].map((algo) => ( //algo = bubble 
             <button
-              key={algo} onClick={() => handleAlgorithmChange(algo)}
+              key={algo} onClick={() => handleAlgorithmChange(algo)} //bubble
               style={{
                 padding: '8px 24px', borderRadius: '25px', border: 'none',
                 background: activeAlgorithm === algo ? 'rgba(212, 168, 75, 0.15)' : 'transparent',

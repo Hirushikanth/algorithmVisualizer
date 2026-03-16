@@ -27,4 +27,9 @@ public class SortingController {
     public List<SortStep> selectionSort(@RequestBody SortRequest request) {
         return sortingService.selectionSort(request.getArray());
     }
+
+    @PostMapping("/insertion")
+    public List<SortStep> insertionSort(@RequestBody SortRequest request) {
+        return sortingService.insertionSort(request.getArray());
+    }
 }
