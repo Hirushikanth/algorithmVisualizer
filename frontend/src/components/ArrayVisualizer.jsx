@@ -61,15 +61,14 @@ const ArrayVisualizer = ({ array = [], highlight = [], pointerInfo = '', algorit
             )}
 
             {/* Values at the bottom */}
-            {array.length <= 25 && (
-              <span style={{ 
-                position: 'absolute', bottom: '-25px', 
-                color: isHighlighted ? 'var(--accent-gold)' : isSorted ? '#80EF80' : 'var(--text-muted)',
-                fontSize: '0.8rem', fontWeight: isHighlighted || isSorted ? 700 : 500,
-              }}>
-                {value}
-              </span>
-            )}
+            <span style={{ 
+              position: 'absolute', bottom: '-25px', 
+              color: isHighlighted ? 'var(--accent-gold)' : isSorted ? '#80EF80' : 'var(--text-muted)',
+              fontSize: '0.75rem', fontWeight: isHighlighted || isSorted ? 700 : 500,
+              fontFamily: '"Fira Code", monospace',
+            }}>
+              {value}
+            </span>
           </motion.div>
         );
       })}

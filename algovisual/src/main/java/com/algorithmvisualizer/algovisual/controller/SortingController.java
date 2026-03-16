@@ -32,4 +32,9 @@ public class SortingController {
     public List<SortStep> insertionSort(@RequestBody SortRequest request) {
         return sortingService.insertionSort(request.getArray());
     }
+
+    @PostMapping("/merge")
+    public List<SortStep> mergeSort(@RequestBody SortRequest request) {
+        return sortingService.mergeSort(request.getArray());
+    }
 }

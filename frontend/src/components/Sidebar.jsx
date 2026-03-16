@@ -30,6 +30,7 @@ const Sidebar = ({ activeAlgorithm, onAlgorithmChange, isCollapsed, setIsCollaps
         { id: 'bubble', name: 'Bubble Sort' },
         { id: 'selection', name: 'Selection Sort' },
         { id: 'insertion', name: 'Insertion Sort' },
+        { id: 'merge', name: 'Merge Sort' },
       ]
     },
     {

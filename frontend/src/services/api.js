@@ -43,5 +43,15 @@ export const sortAPI = {
             console.error("API Error: Insertion Sort", error);
             return [];
         }
+    },
+
+    getMergeSortSteps: async (array) => {
+        try {
+            const response = await apiClient.post('/sort/merge', { array });
+            return response.data;
+        } catch (error) {
+            console.error("API Error: Merge Sort", error);
+            return [];
+        }
     }
 };

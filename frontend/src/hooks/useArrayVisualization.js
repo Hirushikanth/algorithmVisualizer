@@ -35,6 +35,12 @@ const useArrayVisualization = (array, highlight, pointerInfo, algorithm) => {
         const iVal = parseInt(match[1], 10);
         for (let k = 0; k <= iVal; k++) indices.push(k);
       }
+    } else if (algorithm === 'merge') {
+      // Merge sort visualization is complex. For now, we highlight based on the log or range.
+      // If it's sorted successfully, all indices are sorted.
+      if (pointerInfo.includes('sorted successfully')) {
+        return array.map((_, idx) => idx);
+      }
     }
     return indices;
   }, [array, pointerInfo, algorithm]);
@@ -53,6 +59,14 @@ const useArrayVisualization = (array, highlight, pointerInfo, algorithm) => {
     } else if (algorithm === 'insertion' && highlight.length >= 2) {
       if (index === highlight[0]) labels.push('key');
       if (index === highlight[1]) labels.push('j');
+    } else if (algorithm === 'merge' && highlight.length >= 3) {
+      // Based on MergeSort.java: List.of(left, right, mid/k)
+      if (index === highlight[0]) labels.push('L');
+      if (index === highlight[1]) labels.push('R');
+      if (index === highlight[2]) {
+        if (pointerInfo.includes('DIVIDE')) labels.push('mid');
+        if (pointerInfo.includes('MERGE')) labels.push('k');
+      }
     }
     return labels.join(', '); // If multiple pointers land on one bar (e.g., 'i, min')
   };

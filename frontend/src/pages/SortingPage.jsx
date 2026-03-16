@@ -54,6 +54,7 @@ const SortingPage = ({ activeAlgorithm, setActiveAlgorithm }) => {
       if (activeAlgorithm === 'bubble') steps = await sortAPI.getBubbleSortSteps(baseArray);
       else if (activeAlgorithm === 'selection') steps = await sortAPI.getSelectionSortSteps(baseArray);
       else if (activeAlgorithm === 'insertion') steps = await sortAPI.getInsertionSortSteps(baseArray);
+      else if (activeAlgorithm === 'merge') steps = await sortAPI.getMergeSortSteps(baseArray);
       
       setSortSteps(steps);
       setTimeout(() => play(), 100); 
