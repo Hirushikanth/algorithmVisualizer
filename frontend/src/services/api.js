@@ -23,5 +23,15 @@ export const sortAPI = {
             // Return a safe fallback so the frontend doesn't crash
             return [];
         }
+    },
+
+    getSelectionSortSteps: async (array) => {
+        try {
+            const response = await apiClient.post('/sort/selection', { array });
+            return response.data;
+        } catch (error) {
+            console.error("API Error: Selection Sort", error);
+            return [];
+        }
     }
 };

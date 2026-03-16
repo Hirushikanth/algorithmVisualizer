@@ -22,4 +22,9 @@ public class SortingController {
     public List<SortStep> bubbleSort(@RequestBody SortRequest request) {
         return sortingService.bubbleSort(request.getArray());
     }
+
+    @PostMapping("/selection")
+    public List<SortStep> selectionSort(@RequestBody SortRequest request) {
+        return sortingService.selectionSort(request.getArray());
+    }
 }

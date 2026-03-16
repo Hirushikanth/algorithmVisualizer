@@ -32,7 +32,7 @@ const useAnimation = (steps) => {
   }, []);
 
   // Safe fallback if steps array is empty
-  const currentStep = steps[currentStepIndex] || { array: [], highlight: [] };
+  const currentStep = steps[currentStepIndex] || { array: [], highlight: [], pointerInfo: 'Awaiting initialization command...' };
   
   // Calculate progress for a smooth progress bar (optional dopamine hit)
   const progress = steps.length > 0 ? (currentStepIndex / (steps.length - 1)) * 100 : 0;

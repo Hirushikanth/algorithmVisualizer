@@ -197,10 +197,6 @@ Then open `http://localhost:5173` in your browser to access the application.
 - [ ] Add tutorial system
 - [ ] Deploy to cloud (Azure, AWS, Heroku)
 
-## License
-
-This project is open source and available under the MIT License.
-
 ## Contributing
 
 Contributions are welcome! Please feel free to submit pull requests or open issues for bugs and feature requests.
