@@ -1,9 +1,6 @@
 package com.algorithmvisualizer.algovisual.service;
 
-import com.algorithmvisualizer.algovisual.algorithm.BubbleSort;
-import com.algorithmvisualizer.algovisual.algorithm.SelectionSort;
-import com.algorithmvisualizer.algovisual.algorithm.InsertionSort;
-import com.algorithmvisualizer.algovisual.algorithm.MergeSort;
+import com.algorithmvisualizer.algovisual.algorithm.*;
 import com.algorithmvisualizer.algovisual.model.SortStep;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +23,9 @@ public class SortingService {
 
     public List<SortStep> mergeSort(List<Integer> array) {
         return MergeSort.sort(array);
+    }
+
+    public  List<SortStep> quickSort(List<Integer> array) {
+        return QuickSort.sort(array);
     }
 }

@@ -53,5 +53,15 @@ export const sortAPI = {
             console.error("API Error: Merge Sort", error);
             return [];
         }
+    },
+
+    getQuickSortSteps: async (array) => {
+        try {
+            const response = await apiClient.post('/sort/quick', { array });
+            return response.data;
+        } catch (error) {
+            console.error("API Error: Quick Sort", error);
+            return [];
+        }
     }
 };

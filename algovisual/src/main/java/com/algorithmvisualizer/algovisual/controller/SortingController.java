@@ -37,4 +37,9 @@ public class SortingController {
     public List<SortStep> mergeSort(@RequestBody SortRequest request) {
         return sortingService.mergeSort(request.getArray());
     }
+
+    @PostMapping("/quick")
+    public List<SortStep> quickSort(@RequestBody SortRequest request) {
+        return sortingService.quickSort(request.getArray());
+    }
 }
