@@ -1,6 +1,7 @@
 package com.algorithmvisualizer.algovisual.service;
 
 import com.algorithmvisualizer.algovisual.algorithm.LinearSearch;
+import com.algorithmvisualizer.algovisual.algorithm.BinarySearch;
 import com.algorithmvisualizer.algovisual.model.SearchStep;
 import org.springframework.stereotype.Service;
 
@@ -11,5 +12,9 @@ public class SearchService {
 
     public List<SearchStep> linearSearch(List<Integer> array, int target) {
         return LinearSearch.search(array, target);
+    }
+
+    public List<SearchStep> binarySearch(List<Integer> array, int target) {
+        return BinarySearch.search(array, target);
     }
 }

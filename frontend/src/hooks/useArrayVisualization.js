@@ -33,7 +33,7 @@ const useArrayVisualization = (array, highlight, pointerInfo, algorithm) => {
       }
     } 
     // Searching Logic - Lock in the Found item as Green
-    else if (algorithm === 'linear') {
+    else if (['linear', 'binary'].includes(algorithm)) {
       if (pointerInfo.includes('MATCH FOUND')) {
         const match = pointerInfo.match(/arr\[(\d+)\]/);
         if (match) indices.push(parseInt(match[1], 10));
@@ -41,6 +41,18 @@ const useArrayVisualization = (array, highlight, pointerInfo, algorithm) => {
     }
     return indices;
   }, [array, pointerInfo, algorithm]);
+
+  const safeHighlights = useMemo(() => {
+    if (!highlight || highlight.length === 0) return [];
+    if (algorithm === 'linear') return [highlight[0]];
+    if (algorithm === 'binary') {
+      if (pointerInfo.includes('Calculate') || pointerInfo.includes('half')) {
+        return highlight;
+      }
+      return [highlight[0], highlight[1]];
+    }
+    return highlight;
+  }, [highlight, algorithm, pointerInfo]);
 
   const getLabels = (index) => {
     let labels = [];
@@ -64,10 +76,18 @@ const useArrayVisualization = (array, highlight, pointerInfo, algorithm) => {
     else if (algorithm === 'linear' && highlight.length >= 1) {
       if (index === highlight[0]) labels.push('scan');
     }
-    return labels.join(', ');
+
+    else if (algorithm === 'binary') {
+      if (index === highlight[0]) labels.push('L');
+      if (index === highlight[1] && highlight[0] !== highlight[1]) labels.push('R');
+      if (index === highlight[2] && (pointerInfo.includes('Calculate') || pointerInfo.includes('half'))) {
+        labels.push('mid');
+      }
+    }
+    return [...new Set(labels)].join(', ');
   };
 
-  return { sortedIndices, getLabels };
+  return { sortedIndices, safeHighlights, getLabels };
 };
 
 export default useArrayVisualization;

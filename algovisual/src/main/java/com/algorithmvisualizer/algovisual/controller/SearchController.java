@@ -22,4 +22,9 @@ public class SearchController {
     public List<SearchStep> linearSearch(@RequestBody SearchRequest request) {
         return searchService.linearSearch(request.getArray(), request.getTarget());
     }
+
+    @PostMapping("/binary")
+    public List<SearchStep> binarySearch(@RequestBody SearchRequest request) {
+        return searchService.binarySearch(request.getArray(), request.getTarget());
+    }
 }
