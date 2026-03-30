@@ -1,12 +1,18 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const BoxVisualizer = ({ arrayObjects, highlight, sortedIndices, getLabels }) => {
+const BoxVisualizer = ({ arrayObjects, highlight, sortedIndices, getLabels, algorithm }) => {
+  
+  const isSearchAlgo = ['linear', 'binary'].includes(algorithm);
+
   return (
     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', flexWrap: 'wrap', height: '100%', width: '100%', paddingTop: '2rem' }}>
       {arrayObjects.map((item, index) => {
         const value = item.val;
-        const isHighlighted = highlight.includes(index);
+        
+        const activeHighlights = isSearchAlgo ? [highlight[0]] : highlight;
+        const isHighlighted = activeHighlights.includes(index);
+        
         const isSorted = sortedIndices.includes(index);
         const labels = getLabels(index);
         

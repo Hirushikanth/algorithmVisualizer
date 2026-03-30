@@ -15,9 +15,9 @@ const ArrayVisualizer = ({ arrayObjects = [], highlight = [], pointerInfo = '', 
     }}>
       <AnimatePresence mode="wait">
         {mode === 'bars' ? (
-          <BarVisualizer key="bars" arrayObjects={arrayObjects} highlight={highlight} sortedIndices={sortedIndices} getLabels={getLabels} />
+          <BarVisualizer key="bars" arrayObjects={arrayObjects} highlight={highlight} sortedIndices={sortedIndices} getLabels={getLabels} algorithm={algorithm} />
         ) : (
-          <BoxVisualizer key="boxes" arrayObjects={arrayObjects} highlight={highlight} sortedIndices={sortedIndices} getLabels={getLabels} />
+          <BoxVisualizer key="boxes" arrayObjects={arrayObjects} highlight={highlight} sortedIndices={sortedIndices} getLabels={getLabels} algorithm={algorithm} />
         )}
       </AnimatePresence>
     </div>

@@ -39,7 +39,7 @@ const Sidebar = ({ activeAlgorithm, onAlgorithmChange, isCollapsed, setIsCollaps
       name: 'Searching',
       icon: <Search size={20} />,
       algorithms: [
-        { id: 'linear', name: 'Linear Search', disabled: true },
+        { id: 'linear', name: 'Linear Search' },
         { id: 'binary', name: 'Binary Search', disabled: true },
       ]
     }

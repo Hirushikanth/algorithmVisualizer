@@ -2,47 +2,49 @@ import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import SortingPage from './pages/SortingPage';
+import SearchingPage from './pages/SearchingPage';
 
 function App() {
   const [activeAlgorithm, setActiveAlgorithm] = useState('bubble');
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
-  const handleAlgorithmChange = (algo) => {
-    setActiveAlgorithm(algo);
-  };
+  // Define which category each algorithm belongs to
+  const SORTING_ALGOS = ['bubble', 'selection', 'insertion', 'merge', 'quick'];
+  const SEARCHING_ALGOS = ['linear', 'binary'];
 
   return (
-    <div className="app-container">
+    <div className="app-container" style={{ display: 'flex' }}>
       <Navbar />
       
-      <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--space-dark)' }}>
-        <Sidebar 
-          activeAlgorithm={activeAlgorithm} 
-          onAlgorithmChange={handleAlgorithmChange} 
-          isCollapsed={isSidebarCollapsed}
-          setIsCollapsed={setIsSidebarCollapsed}
-        />
+      <Sidebar 
+        activeAlgorithm={activeAlgorithm} 
+        onAlgorithmChange={setActiveAlgorithm} 
+        isCollapsed={isSidebarCollapsed}
+        setIsCollapsed={setIsSidebarCollapsed}
+      />
+      
+      <main style={{ 
+        flex: 1,
+        paddingTop: '100px', 
+        paddingBottom: '2rem',
+        paddingLeft: isSidebarCollapsed ? '120px' : '320px', // Adjust padding based on sidebar
+        paddingRight: '2rem',
+        display: 'flex', 
+        justifyContent: 'center',
+        minHeight: '100vh',
+        transition: 'padding-left 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+      }}>
         
-        <main style={{ 
-          paddingTop: '100px', 
-          paddingBottom: '2rem',
-          paddingLeft: isSidebarCollapsed ? '100px' : '320px', // Dynamic padding
-          paddingRight: '2rem',
-          flexGrow: 1,
-          display: 'flex', 
-          flexDirection: 'column',
-          alignItems: 'center',
-          transition: 'padding-left 0.4s cubic-bezier(0.4, 0, 0.2, 1)', // Smooth transition
-          minWidth: 0
-        }}>
-          <div style={{ maxWidth: '1200px', width: '100%' }}>
-            <SortingPage 
-              activeAlgorithm={activeAlgorithm} 
-              setActiveAlgorithm={handleAlgorithmChange}
-            />
-          </div>
-        </main>
-      </div>
+        {/* ROUTING LOGIC */}
+        {SORTING_ALGOS.includes(activeAlgorithm) ? (
+          <SortingPage activeAlgorithm={activeAlgorithm} setActiveAlgorithm={setActiveAlgorithm} />
+        ) : SEARCHING_ALGOS.includes(activeAlgorithm) ? (
+          <SearchingPage activeAlgorithm={activeAlgorithm} />
+        ) : (
+          <div style={{ color: 'white' }}>Algorithm not found.</div>
+        )}
+
+      </main>
     </div>
   );
 }

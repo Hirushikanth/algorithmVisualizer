@@ -1,14 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const BarVisualizer = ({ arrayObjects, highlight, sortedIndices, getLabels }) => {
+const BarVisualizer = ({ arrayObjects, highlight, sortedIndices, getLabels, algorithm }) => {
   const maxVal = Math.max(...arrayObjects.map(o => o.val), 1);
+  
+  const isSearchAlgo = ['linear', 'binary'].includes(algorithm);
 
   return (
-    <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center', gap: '4px', height: '100%', width: '100%', paddingTop: '2rem' }}>
+    <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'center', gap: '4px', height: '100%', width: '100%', paddingTop: '2rem', paddingBottom: '2rem' }}>
       {arrayObjects.map((item, index) => {
         const value = item.val;
-        const isHighlighted = highlight.includes(index);
+        
+        const activeHighlights = isSearchAlgo ? [highlight[0]] : highlight;
+        const isHighlighted = activeHighlights.includes(index);
+        
         const isSorted = sortedIndices.includes(index);
         const labels = getLabels(index);
         

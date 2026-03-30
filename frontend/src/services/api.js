@@ -65,3 +65,15 @@ export const sortAPI = {
         }
     }
 };
+
+export const searchAPI = {
+    getLinearSearchSteps: async (array, target) => {
+        try {
+            const response = await apiClient.post('/search/linear', { array, target });
+            return response.data;
+        } catch (error) {
+            console.error("API Error: Linear Search", error);
+            return [];
+        }
+    }
+};
